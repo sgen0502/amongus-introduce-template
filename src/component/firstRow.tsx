@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDropzone} from 'react-dropzone';
 import star from "../resources/star.png";
 import imagePlaceHolder from "../resources/imagePlaceHolder.png";
-import {Box, Button, createStyles, Grid, Input, makeStyles, Theme, Typography} from "@material-ui/core";
+import {Box, Button, createStyles, Input, makeStyles, Theme} from "@material-ui/core";
 import name from "../resources/name.png";
 import playDevice from "../resources/playDevice.png";
 import pc from "../resources/PC.png";

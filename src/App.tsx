@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import {TemplateGenerator} from "./component/templateGenerator";
-import {AppBar, Button, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Toolbar, Typography} from "@material-ui/core";
 
 const theme = createMuiTheme({
     // palette: {

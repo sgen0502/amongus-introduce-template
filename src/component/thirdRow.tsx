@@ -1,17 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import {
     Box,
-    Button,
     createStyles,
-    Grid,
-    Input,
-    makeStyles, Menu,
+    makeStyles,
     MenuItem,
     Select,
     Theme,
-    Typography
 } from "@material-ui/core";
-import classnames from "classnames";
 import playTime from "../resources/playTime.png";
 import mapLike from "../resources/mapLike.png";
 import playStyle from "../resources/playStyle.png";
@@ -135,15 +130,6 @@ export interface ThirdRowProps {
     boxColor: string;
 }
 
-const SelectButton = (props: {img: any, select: boolean, setter: React.Dispatch<React.SetStateAction<boolean>>, className: string}) => {
-    const {img, select, setter, className} = props;
-
-    return (
-        <Button onClick={() => setter(!select)}>
-            <img src={img} alt="pc" className={className} />
-        </Button>
-    )
-}
 export const ThirdRow = (props: ThirdRowProps) => {
 
     const {bgColor, boxColor} = props;

@@ -1,4 +1,4 @@
-import React, {createRef, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {
     AppBar,
     Box,
@@ -9,8 +9,7 @@ import {
     makeStyles,
     Theme,
     Toolbar,
-    Typography,
-    Input
+    Typography
 } from "@material-ui/core";
 import { exportComponentAsPNG  } from 'react-component-export-image';
 import { SketchPicker } from 'react-color';
@@ -55,23 +54,23 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
     })
 );
 
-const canvasProps = {
-    onChange: null,
-    loadTimeOffset: 5,
-    lazyRadius: 30,
-    brushRadius: 12,
-    brushColor: "#444",
-    catenaryColor: "#0a0302",
-    gridColor: "rgba(150,150,150,0.17)",
-    hideGrid: true,
-    canvasWidth: 400,
-    canvasHeight: 400,
-    disabled: false,
-    imgSrc: "",
-    saveData: null,
-    immediateLoading: false,
-    hideInterface: false
-};
+// const canvasProps = {
+//     onChange: null,
+//     loadTimeOffset: 5,
+//     lazyRadius: 30,
+//     brushRadius: 12,
+//     brushColor: "#444",
+//     catenaryColor: "#0a0302",
+//     gridColor: "rgba(150,150,150,0.17)",
+//     hideGrid: true,
+//     canvasWidth: 400,
+//     canvasHeight: 400,
+//     disabled: false,
+//     imgSrc: "",
+//     saveData: null,
+//     immediateLoading: false,
+//     hideInterface: false
+// };
 
 //font gooddog-new,
 export const TemplateGenerator = () => {

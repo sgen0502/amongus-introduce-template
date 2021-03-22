@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Box, Button, createStyles, Grid, Input, makeStyles, Theme, Typography} from "@material-ui/core";
+import {Box, Button, createStyles, makeStyles, Theme} from "@material-ui/core";
 import classnames from "classnames";
 import amongusLogo from "../resources/amongus.png";
 import myColor from "../resources/myColor.png";
