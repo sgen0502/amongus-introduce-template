@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Box,
     createStyles,
@@ -131,6 +131,7 @@ export interface ThirdRowProps {
 }
 
 export const ThirdRow = (props: ThirdRowProps) => {
+    const [map, setMap] = useState(1);
 
     const {bgColor, boxColor} = props;
     const classes = useStyles(bgColor, boxColor)();
@@ -153,7 +154,7 @@ export const ThirdRow = (props: ThirdRowProps) => {
                         <div className={classes.flex}>
                             <img src={mapLike} alt="name" className={classes.playTimeImg} />
                         </div>
-                        <Select className={classes.mapSelect} disableUnderline={true}>
+                        <Select className={classes.mapSelect} disableUnderline={true} value={map} onChange={event => setMap(event.target.value as number)}>
                             <MenuItem value={1}><img src={theSkeld} alt="name" className={classes.mapImage}/></MenuItem>
                             <MenuItem value={2}><img src={miraHq} alt="name" className={classes.mapImage}/></MenuItem>
                             <MenuItem value={3}><img src={polus} alt="name"  className={classes.mapImage}/></MenuItem>

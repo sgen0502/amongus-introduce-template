@@ -1,9 +1,8 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import {TemplateGenerator} from "./component/templateGenerator";
-import {AppBar, Button, Toolbar, Typography} from "@material-ui/core";
-import {exportComponentAsPNG} from "react-component-export-image";
+import {AppBar, Toolbar, Typography} from "@material-ui/core";
 
 const theme = createMuiTheme({
     // palette: {
@@ -15,7 +14,7 @@ const theme = createMuiTheme({
     //     },
     // },
     typography: {
-        "fontFamily": `"Montserrat", "Helvetica", "Arial", sans-serif`,
+        "fontFamily": `"Noto Sans JP", "Helvetica", "Arial", sans-serif`,
     }
 });
 

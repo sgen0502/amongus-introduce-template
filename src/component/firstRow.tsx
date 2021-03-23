@@ -69,7 +69,9 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
         },
         input: {
             margin: theme.spacing(2),
-            fontSize: "58px"
+            fontSize: "58px",
+            //fontFamily: "'Noto Sans JP', sans-serif"
+            fontFamily: "'Hachi Maru Pop', cursive"
         },
     })
 );
