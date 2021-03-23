@@ -6,7 +6,7 @@ import {
     Container,
     createStyles,
     Grid,
-    makeStyles,
+    makeStyles, Menu, MenuItem,
     Theme,
     Toolbar,
     Typography
@@ -38,6 +38,13 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
             opacity: 0.15
         },
         title: {},
+        menu: {
+            display: "flex",
+            justifyContent: "space-around",
+        },
+        menuItem: {
+            margin: theme.spacing(1)
+        },
         box: {
             margin: theme.spacing(1),
             background: mainColor,
@@ -73,12 +80,22 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
 // };
 
 //font gooddog-new,
-export const TemplateGenerator = () => {
+export const TemplateGenerator = (props : {ref?: any}) => {
     const [bgColor, setBgColor] = useState("#E9CFD7")
     const [boxColor, setBoxColor] = useState("#F4E7E8")
 
     const [hideCanvas, setHideCanvas] = useState(true)
     const classes = useStyles(bgColor, boxColor)();
+
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const exportRef = useRef(null);
     return (
@@ -88,21 +105,36 @@ export const TemplateGenerator = () => {
                     <AppBar position={"static"}>
                         <Toolbar>
                             <Typography className={classes.title} variant="h6" noWrap>
-                                テンプレート
+                                機能
                             </Typography>
                             <div className={classes.grow}/>
-                            <button onClick={() => exportComponentAsPNG (exportRef)}>
-                                Export As PNG
-                            </button>
-                            <SketchPicker
-                                color={ bgColor }
-                                onChangeComplete={(color: any) => setBgColor(color.hex)}
-                            />
-                            <SketchPicker
-                                color={ boxColor }
-                                onChangeComplete={(color: any) => setBoxColor(color.hex)}
-                            />
-                            <Button variant={"contained"} color={"secondary"} 　onClick={() => setHideCanvas(!hideCanvas)}>落書きモード</Button>
+                            <div className={classes.menu}>
+                                <Button className={classes.menuItem} variant={"contained"} color={"default"}  onClick={() => exportComponentAsPNG (exportRef)}>
+                                    ダウンロード
+                                </Button>
+                                <Button className={classes.menuItem} variant={"contained"} color={"primary"}  aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    色変更
+                                </Button>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <div>
+                                        <SketchPicker
+                                            color={ bgColor }
+                                            onChangeComplete={(color: any) => setBgColor(color.hex)}
+                                        />
+                                        <SketchPicker
+                                            color={ boxColor }
+                                            onChangeComplete={(color: any) => setBoxColor(color.hex)}
+                                        />
+                                    </div>
+                                </Menu>
+                                <Button className={classes.menuItem} variant={"contained"} color={"secondary"} 　onClick={() => setHideCanvas(!hideCanvas)}>落書きモード</Button>
+                            </div>
                         </Toolbar>
                     </AppBar>
                 </Grid>

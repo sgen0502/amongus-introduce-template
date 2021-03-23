@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import './App.css';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import {TemplateGenerator} from "./component/templateGenerator";
-import {AppBar, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Toolbar, Typography} from "@material-ui/core";
+import {exportComponentAsPNG} from "react-component-export-image";
 
 const theme = createMuiTheme({
     // palette: {
@@ -19,6 +20,7 @@ const theme = createMuiTheme({
 });
 
 function App() {
+
     return (
         <div className="App">
             <ThemeProvider theme={theme}>
