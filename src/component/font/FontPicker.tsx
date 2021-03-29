@@ -44,7 +44,11 @@ export const FontPicker = (props: FontPickerProps) => {
                 >
                     {
                         AvailableFonts.map(f => {
-                            return (<MenuItem value={f.value} style={{fontFamily: f.value}}>{f.name}</MenuItem>)
+                            return (
+                                <MenuItem value={f.value} style={{fontFamily: f.value}}>
+                                    {f.name}
+                                </MenuItem>
+                            )
                         })
                     }
             </Select>

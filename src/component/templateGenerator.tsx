@@ -20,8 +20,7 @@ import {SecondRow} from "./secondRow";
 import {ThirdRow} from "./thirdRow";
 import sign from "../resources/sign.png";
 import {FontPicker} from "./font/FontPicker";
-
-const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Theme) =>
+const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
     createStyles({
         container: {
             display: "flex",
@@ -64,6 +63,9 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
         secondRow: {
             marginTop: "40px",
             display: "flex",
+        },
+        hide: {
+            visibility: "collapse"
         }
     })
 );
@@ -91,7 +93,7 @@ export const TemplateGenerator = () => {
     const [boxColor, setBoxColor] = useState("#F4E7E8")
 
     const [hideCanvas, setHideCanvas] = useState(true)
-    const classes = useStyles(bgColor, boxColor)();
+    const classes = useStyles(bgColor)();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const state = ApplicationState.useContainer();
@@ -161,10 +163,9 @@ export const TemplateGenerator = () => {
                                 <Button className={classes.menuItem} variant={"contained"} color={"secondary"}  aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                     色変更
                                 </Button>
-
-                                {/*<Button className={classes.menuItem} variant={"contained"} color={"secondary"} onClick={() => {*/}
-                                {/*    setHideCanvas(!hideCanvas)*/}
-                                {/*}}>落書きモード</Button>*/}
+                                <Button className={classes.menuItem} variant={"outlined"} color={"secondary"} onClick={() => {
+                                    setHideCanvas(!hideCanvas)
+                                }}>落書きモード</Button>
                             </div>
                         </Toolbar>
                     </AppBar>

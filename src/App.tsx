@@ -34,7 +34,7 @@ function App() {
                 <AppBar position="sticky">
                     <Toolbar>
                         <Typography variant="h6">
-                            Among Us 自己紹介テンプレート
+                            Among Us 自己紹介クリエイター
                         </Typography>
                     </Toolbar>
                 </AppBar>
