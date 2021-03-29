@@ -13,13 +13,14 @@ import {
 } from "@material-ui/core";
 import ApplicationState from "../state/ApplicationStateContainer";
 import { exportComponentAsPNG  } from 'react-component-export-image';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import CanvasDraw from "react-canvas-draw";
 import {FirstRow} from "./firstRow";
 import {SecondRow} from "./secondRow";
 import {ThirdRow} from "./thirdRow";
 import sign from "../resources/sign.png";
 import {FontPicker} from "./font/FontPicker";
+import classNames from "classnames";
 const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
     createStyles({
         container: {
@@ -64,9 +65,10 @@ const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
             marginTop: "40px",
             display: "flex",
         },
-        hide: {
-            visibility: "collapse"
-        }
+        colorBox: {
+          marginLeft: theme.spacing(1),
+          minWidth: "100px"
+        },
     })
 );
 
@@ -88,6 +90,16 @@ const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
 //     hideInterface: false
 // };
 
+const Preset = [
+    {name: "pink", bgColor: "#E9CFD7", boxColor: "#F4E7E8"},
+    {name: "orange", bgColor: "#E9D6CF", boxColor: "#F4EEE7"},
+    {name: "yellow", bgColor: "#E9E5CF", boxColor: "#F3F4E7"},
+    {name: "green", bgColor: "#CFE9CF", boxColor: "#E7F4EB"},
+    {name: "skyblue", bgColor: "#CFE9E7", boxColor: "#E7F1F4"},
+    {name: "blue", bgColor: "#CFDAE9", boxColor: "#E7E9F4"},
+    {name: "purple", bgColor: "#DDCFE9", boxColor: "#F0E7F4"}
+]
+
 export const TemplateGenerator = () => {
     const [bgColor, setBgColor] = useState("#E9CFD7")
     const [boxColor, setBoxColor] = useState("#F4E7E8")
@@ -105,6 +117,15 @@ export const TemplateGenerator = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const onColorPresetChange = (preset: any) => {
+        const selectedColor = preset.target.value;
+        const color = Preset.find(p => p.name === selectedColor);
+        if(color){
+            setBgColor(color.bgColor);
+            setBoxColor(color.boxColor);
+        }
+    }
 
     const exportRef = useRef(null);
     const canvasRef = useRef({} as CanvasDraw);
@@ -134,26 +155,33 @@ export const TemplateGenerator = () => {
                                         <Toolbar>
                                             <Typography>プリセット</Typography>
                                             <div className={classes.grow} />
-                                            <Select className={classes.grow} disableUnderline={true} >
-                                                <MenuItem value={1}>
-                                                    <div className={classes.flex}>ピンク: 全体 <div>{bgColor}</div>, 四角内 <div>{boxColor}</div></div>
-                                                </MenuItem>
-                                                <MenuItem value={2}>青</MenuItem>
-                                                <MenuItem value={3}>緑</MenuItem>
+                                            <Select className={classes.grow} disableUnderline={true} defaultValue={"pink"} onChange={onColorPresetChange}>
+                                                {Preset.map(p => (
+                                                    <MenuItem key={p.name} value={p.name}>
+                                                        <div className={classes.flex}>
+                                                            <div className={classNames(classes.flex, classes.menuItem)}>
+                                                                全体: <div className={classes.colorBox} style={{background: p.bgColor}}/>
+                                                            </div>
+                                                            <div className={classNames(classes.flex, classes.menuItem)}>
+                                                                四角: <div className={classes.colorBox} style={{background: p.boxColor}}/>
+                                                            </div>
+                                                        </div>
+                                                    </MenuItem>
+                                                ))}
                                             </Select>
                                         </Toolbar>
                                     </AppBar>
                                     <div className={classes.menu}>
-                                        <div>
+                                        <div className={classes.menuItem}>
                                             <Typography>全体</Typography>
-                                            <SketchPicker
+                                            <ChromePicker
                                                 color={ bgColor }
                                                 onChangeComplete={(color: any) => setBgColor(color.hex)}
                                             />
                                         </div>
-                                        <div>
+                                        <div className={classes.menuItem}>
                                             <Typography>四角内</Typography>
-                                            <SketchPicker
+                                            <ChromePicker
                                                 color={ boxColor }
                                                 onChangeComplete={(color: any) => setBoxColor(color.hex)}
                                             />
