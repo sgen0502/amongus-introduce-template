@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDropzone} from 'react-dropzone';
 import star from "../resources/star.png";
 import imagePlaceHolder from "../resources/imagePlaceHolder.png";
-import {Box, Button, createStyles, Input, makeStyles, Theme} from "@material-ui/core";
+import {Box, Button, createStyles, Input, makeStyles, Theme, Tooltip} from "@material-ui/core";
 import name from "../resources/name.png";
 import playDevice from "../resources/playDevice.png";
 import pc from "../resources/PC.png";
@@ -10,7 +10,7 @@ import classnames from "classnames";
 import phone from "../resources/phone.png";
 import switchImg from "../resources/switch.png";
 
-const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Theme) =>
+const useStyles = (mainColor: string, boxColor: string, font: string) => makeStyles((theme: Theme) =>
     createStyles({
         flex: {
             display: "flex",
@@ -68,17 +68,21 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
             justifyContent: "center",
         },
         input: {
-            margin: theme.spacing(2),
+            margin: theme.spacing(1),
+            marginLeft: theme.spacing(12),
             fontSize: "58px",
-            //fontFamily: "'Noto Sans JP', sans-serif"
-            fontFamily: "'Hachi Maru Pop', cursive"
+            fontFamily: font
         },
+        nameTooltip:{
+            fontSize: "50px",
+        }
     })
 );
 
 export interface FirstRowProps {
     bgColor: string;
     boxColor: string;
+    font: string;
 }
 
 export const FirstRow = (props: FirstRowProps) => {
@@ -88,8 +92,8 @@ export const FirstRow = (props: FirstRowProps) => {
     const [thumbNail, setThumbNail] = useState(imagePlaceHolder);
     const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
-    const {bgColor, boxColor} = props;
-    const classes = useStyles(bgColor, boxColor)();
+    const {bgColor, boxColor, font} = props;
+    const classes = useStyles(bgColor, boxColor, font)();
 
     useEffect(() => {
         acceptedFiles.forEach(file => {
@@ -102,15 +106,12 @@ export const FirstRow = (props: FirstRowProps) => {
                 <img src={star} alt="star" className={classes.star}/>
             </div>
             <Box className={classes.thumbNailBox}>
-                {/*<input ref={imageUploadRef} type="file" onChange={(event) => {*/}
-                {/*    const image = event && event.target && event.target.files;*/}
-                {/*    if(image && image.length > 0) setThumbNail(URL.createObjectURL(image[0]))*/}
-                {/*}}/>*/}
-
-                <div {...getRootProps({className: 'dropzone'})}>
-                    <input {...getInputProps()} />
-                    <img src={thumbNail} alt="thumbNail" className={classes.thumbNail}/>
-                </div>
+                <Tooltip className={classes.nameTooltip} title="クリックして画像をアップロード" arrow>
+                    <div {...getRootProps({className: 'dropzone'})}>
+                        <input {...getInputProps()} />
+                        <img src={thumbNail} alt="thumbNail" className={classes.thumbNail}/>
+                    </div>
+                </Tooltip>
             </Box>
             <Box className={classes.nameBox} borderRadius={16}>
                 <div className={classes.flex}>

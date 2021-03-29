@@ -3,6 +3,7 @@ import './App.css';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import {TemplateGenerator} from "./component/templateGenerator";
 import {AppBar, Toolbar, Typography} from "@material-ui/core";
+import ApplicationState from "./state/ApplicationStateContainer";
 
 const theme = createMuiTheme({
     // palette: {
@@ -15,6 +16,13 @@ const theme = createMuiTheme({
     // },
     typography: {
         "fontFamily": `"Noto Sans JP", "Helvetica", "Arial", sans-serif`,
+    },
+    overrides: {
+        MuiTooltip: {
+            tooltip: {
+                fontSize: "1em",
+            }
+        }
     }
 });
 
@@ -30,7 +38,9 @@ function App() {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <TemplateGenerator/>
+                <ApplicationState.Provider>
+                    <TemplateGenerator/>
+                </ApplicationState.Provider>
             </ThemeProvider>
         </div>
     );

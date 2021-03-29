@@ -18,8 +18,7 @@ import ufo from "../resources/ufo.png";
 import neko from "../resources/neko.png";
 import alienHat from "../resources/alianHat.png";
 
-
-const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Theme) =>
+const useStyles = (mainColor: string, boxColor: string, font: string) => makeStyles((theme: Theme) =>
     createStyles({
         parentDiv: {
           display: "flex",
@@ -51,7 +50,8 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
         input: {
             margin: theme.spacing(2),
             textAlign: "left",
-            fontSize: "36px"
+            fontSize: "36px",
+            fontFamily: font
         },
         sideInput: {
             marginTop: theme.spacing(1),
@@ -59,11 +59,13 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
             overflowY: "auto",
             minHeight: "130px",
             textAlign: "left",
-            fontSize: "36px"
+            fontSize: "36px",
+            fontFamily: font
         },
         verticalInput: {
             margin: theme.spacing(2),
             fontSize: "36px",
+            fontFamily: font,
             textAlign: "left",
             writingMode: "vertical-lr",
 
@@ -128,13 +130,14 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
 export interface ThirdRowProps {
     bgColor: string;
     boxColor: string;
+    font: string;
 }
 
 export const ThirdRow = (props: ThirdRowProps) => {
     const [map, setMap] = useState(1);
 
-    const {bgColor, boxColor} = props;
-    const classes = useStyles(bgColor, boxColor)();
+    const {bgColor, boxColor, font} = props;
+    const classes = useStyles(bgColor, boxColor, font)();
     return (
         <React.Fragment>
             <div className={classes.parentDiv}>

@@ -11,12 +11,15 @@ import {
     Toolbar,
     Typography
 } from "@material-ui/core";
+import ApplicationState from "../state/ApplicationStateContainer";
 import { exportComponentAsPNG  } from 'react-component-export-image';
 import { SketchPicker } from 'react-color';
 import CanvasDraw from "react-canvas-draw";
 import {FirstRow} from "./firstRow";
 import {SecondRow} from "./secondRow";
 import {ThirdRow} from "./thirdRow";
+import sign from "../resources/sign.png";
+import {FontPicker} from "./font/FontPicker";
 
 const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Theme) =>
     createStyles({
@@ -28,6 +31,10 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
         },
         flex: {
             display: "flex",
+        },
+        flexRowReverse: {
+            display: "flex",
+            flexDirection: "row-reverse",
         },
         grow: {
             flexGrow: 1
@@ -79,8 +86,7 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
 //     hideInterface: false
 // };
 
-//font gooddog-new,
-export const TemplateGenerator = (props : {ref?: any}) => {
+export const TemplateGenerator = () => {
     const [bgColor, setBgColor] = useState("#E9CFD7")
     const [boxColor, setBoxColor] = useState("#F4E7E8")
 
@@ -88,6 +94,7 @@ export const TemplateGenerator = (props : {ref?: any}) => {
     const classes = useStyles(bgColor, boxColor)();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const state = ApplicationState.useContainer();
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -103,26 +110,32 @@ export const TemplateGenerator = (props : {ref?: any}) => {
         <Container className={classes.container} fixed>
             <Grid container>
                 <Grid item xs={12}>
-                    <AppBar position={"static"}>
+                    <AppBar position={"static"} color={"default"}>
                         <Toolbar>
                             <Typography className={classes.title} variant="h6" noWrap>
-                                機能
+                                メニュー
                             </Typography>
                             <div className={classes.grow}/>
+                            <Button className={classes.menuItem} variant={"contained"} color={"primary"}  onClick={() => exportComponentAsPNG (exportRef)}>
+                                画像をダウンロード
+                            </Button>
+                            <FontPicker className={classes.menuItem} selectedFont={state.font} onChange={state.setFont}/>
                             <div >
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                >
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
                                     <AppBar position={"relative"} color={"default"}>
                                         <Toolbar>
                                             <Typography>プリセット</Typography>
-                                            <div className={classes.grow}/>
-                                            <Select disableUnderline={true} >
-                                                <MenuItem value={1}>ピンク</MenuItem>
+                                            <div className={classes.grow} />
+                                            <Select className={classes.grow} disableUnderline={true} >
+                                                <MenuItem value={1}>
+                                                    <div className={classes.flex}>ピンク: 全体 <div>{bgColor}</div>, 四角内 <div>{boxColor}</div></div>
+                                                </MenuItem>
                                                 <MenuItem value={2}>青</MenuItem>
                                                 <MenuItem value={3}>緑</MenuItem>
                                             </Select>
@@ -145,16 +158,13 @@ export const TemplateGenerator = (props : {ref?: any}) => {
                                         </div>
                                     </div>
                                 </Menu>
-                                <Button className={classes.menuItem} variant={"contained"} color={"default"}  onClick={() => exportComponentAsPNG (exportRef)}>
-                                    ダウンロード
-                                </Button>
                                 <Button className={classes.menuItem} variant={"contained"} color={"secondary"}  aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                     色変更
                                 </Button>
 
-                                <Button className={classes.menuItem} variant={"contained"} color={"secondary"} onClick={() => {
-                                    setHideCanvas(!hideCanvas)
-                                }}>落書きモード</Button>
+                                {/*<Button className={classes.menuItem} variant={"contained"} color={"secondary"} onClick={() => {*/}
+                                {/*    setHideCanvas(!hideCanvas)*/}
+                                {/*}}>落書きモード</Button>*/}
                             </div>
                         </Toolbar>
                     </AppBar>
@@ -163,15 +173,20 @@ export const TemplateGenerator = (props : {ref?: any}) => {
                     <div ref={exportRef}>
                         <Box id="template" className={classes.box}>
                             <Grid container>
-                                {hideCanvas ? null : <CanvasDraw ref={canvasRef} hideGrid={true} canvasWidth={1460} canvasHeight={1180} style={{background: "transparent", marginLeft: "0px", position: "absolute"}}/>}
+                                <CanvasDraw ref={canvasRef} hideGrid={true} canvasWidth={1686} canvasHeight={1180} style={{visibility: hideCanvas ? "collapse" : "visible", background: "transparent", marginLeft: "0px", position: "absolute"}}/>
                                 <Grid item xs={12} className={classes.firstRow}>
-                                    <FirstRow bgColor={bgColor} boxColor={boxColor}/>
+                                    <FirstRow bgColor={bgColor} boxColor={boxColor} font={state.font}/>
                                 </Grid>
                                 <Grid item xs={12} className={classes.secondRow}>
                                     <SecondRow bgColor={bgColor} boxColor={boxColor}/>
                                 </Grid>
                                 <Grid item xs={12} className={classes.secondRow}>
-                                    <ThirdRow bgColor={bgColor} boxColor={boxColor}/>
+                                    <ThirdRow bgColor={bgColor} boxColor={boxColor} font={state.font}/>
+                                </Grid>
+                                <Grid item xs={12} className={classes.flexRowReverse}>
+                                    <div className={classes.flex}>
+                                        <img src={sign} alt="name" className={classes.flex} />
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Box>
