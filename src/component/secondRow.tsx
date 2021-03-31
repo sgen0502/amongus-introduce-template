@@ -102,7 +102,7 @@ export const SecondRow = (props: SecondRowProps) => {
                 <div className={classes.flex}>
                     <img src={myColor} alt="myColor" className={classes.myColorImg} />
                 </div>
-                <Tooltip className={classes.nameTooltip} title="クリックで選択" arrow>
+                <Tooltip className={classes.nameTooltip} title="クリック・タップで選択" arrow>
                     <div className={classes.deviceDiv}>
                         <GrayButton img={whiteGuy} select={selectWhite} setter={setSelectWhite} className={classnames(classes.characterBtn, {[classes.gray]: selectWhite})} />
                         <GrayButton img={redGuy} select={selectRed} setter={setSelectRed} className={classnames(classes.characterBtn, {[classes.gray]: selectRed})} />

@@ -125,7 +125,7 @@ export const FirstRow = (props: FirstRowProps) => {
                 <div className={classes.flex}>
                     <img src={playDevice} alt="playDevice" className={classes.playTimeImg} />
                 </div>
-                <Tooltip className={classes.nameTooltip} title="クリックで選択" arrow>
+                <Tooltip className={classes.nameTooltip} title="クリック・タップで選択" arrow>
                     <div className={classes.deviceDiv}>
                         <Button onClick={() => setSelectPc(!selectPc)}>
                             <img src={pc} alt="pc" className={classnames(classes.playTimeImg, {[classes.gray]: selectPc})} />
