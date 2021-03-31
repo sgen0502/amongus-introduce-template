@@ -31,7 +31,7 @@ function App() {
     return (
         <div className="App">
             <ThemeProvider theme={theme}>
-                <AppBar position="sticky">
+                <AppBar position="relative">
                     <Toolbar>
                         <Typography variant="h6">
                             Among Us 自己紹介クリエイター

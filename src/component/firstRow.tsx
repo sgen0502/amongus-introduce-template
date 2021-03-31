@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDropzone} from 'react-dropzone';
 import star from "../resources/star.png";
 import imagePlaceHolder from "../resources/imagePlaceHolder.png";
-import {Box, Button, createStyles, Input, makeStyles, Theme, Tooltip} from "@material-ui/core";
+import {Box, Button, createStyles, makeStyles, Theme, Tooltip} from "@material-ui/core";
 import name from "../resources/name.png";
 import playDevice from "../resources/playDevice.png";
 import pc from "../resources/PC.png";
@@ -69,9 +69,9 @@ const useStyles = (mainColor: string, boxColor: string, font: string) => makeSty
         },
         input: {
             margin: theme.spacing(1),
-            marginLeft: theme.spacing(12),
             fontSize: "58px",
-            fontFamily: font
+            fontFamily: font,
+            minHeight: "130px"
         },
         nameTooltip:{
             fontSize: "50px",
@@ -117,23 +117,27 @@ export const FirstRow = (props: FirstRowProps) => {
                 <div className={classes.flex}>
                     <img src={name} alt="name" className={classes.playTimeImg} />
                 </div>
-                <Input className={classes.input} disableUnderline={true} placeholder={"名前"}/>
+                <div contentEditable="true" className={classes.input}>
+                    <span>名前</span>
+                </div>
             </Box>
             <Box className={classes.deviceBox} borderRadius={16}>
                 <div className={classes.flex}>
                     <img src={playDevice} alt="playDevice" className={classes.playTimeImg} />
                 </div>
-                <div className={classes.deviceDiv}>
-                    <Button onClick={() => setSelectPc(!selectPc)}>
-                        <img src={pc} alt="pc" className={classnames(classes.playTimeImg, {[classes.gray]: selectPc})} />
-                    </Button>
-                    <Button onClick={() => setSelectPhone(!selectPhone)}>
-                        <img src={phone} alt="phone" className={classnames(classes.playTimeImg, {[classes.gray]: selectPhone})} />
-                    </Button>
-                    <Button onClick={() => setSelectSwitch(!selectSwitch)}>
-                        <img src={switchImg} alt="switch" className={classnames(classes.playTimeImg, {[classes.gray]: selectSwitch})} />
-                    </Button>
-                </div>
+                <Tooltip className={classes.nameTooltip} title="クリックで選択" arrow>
+                    <div className={classes.deviceDiv}>
+                        <Button onClick={() => setSelectPc(!selectPc)}>
+                            <img src={pc} alt="pc" className={classnames(classes.playTimeImg, {[classes.gray]: selectPc})} />
+                        </Button>
+                        <Button onClick={() => setSelectPhone(!selectPhone)}>
+                            <img src={phone} alt="phone" className={classnames(classes.playTimeImg, {[classes.gray]: selectPhone})} />
+                        </Button>
+                        <Button onClick={() => setSelectSwitch(!selectSwitch)}>
+                            <img src={switchImg} alt="switch" className={classnames(classes.playTimeImg, {[classes.gray]: selectSwitch})} />
+                        </Button>
+                    </div>
+                </Tooltip>
             </Box>
         </React.Fragment>
     )
