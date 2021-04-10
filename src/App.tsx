@@ -6,14 +6,6 @@ import {AppBar, Toolbar, Typography} from "@material-ui/core";
 import ApplicationState from "./state/ApplicationStateContainer";
 
 const theme = createMuiTheme({
-    // palette: {
-    //     primary: {
-    //         main: '#E9B935',
-    //     },
-    //     secondary: {
-    //         main: green[500],
-    //     },
-    // },
     typography: {
         "fontFamily": `"Noto Sans JP", "Helvetica", "Arial", sans-serif`,
     },

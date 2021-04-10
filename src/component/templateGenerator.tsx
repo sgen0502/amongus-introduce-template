@@ -20,6 +20,7 @@ import {ThirdRow} from "./thirdRow";
 import sign from "../resources/sign.png";
 import {FontPicker} from "./font/FontPicker";
 import classNames from "classnames";
+import { TutorialDialog } from "./tutorialDialog";
 const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
     createStyles({
         container: {
@@ -51,8 +52,15 @@ const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
         menuItem: {
             margin: theme.spacing(1)
         },
+        explain: {
+            color: "#FFFFFF",
+            fontWeight: "bold",
+            background: "#fcb840"
+        },
+        mainGrid: {
+            margin: theme.spacing(2)
+        },
         box: {
-            margin: theme.spacing(1),
             background: mainColor,
             height: "1220px"
         },
@@ -105,11 +113,21 @@ const Preset = [
 export const TemplateGenerator = () => {
     const [bgColor, setBgColor] = useState("#E9CFD7");
     const [boxColor, setBoxColor] = useState("#F4E7E8");
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
     const classes = useStyles(bgColor)();
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const state = ApplicationState.useContainer();
+
+
+
+    const handleDialogClickOpen = () => {
+        setDialogOpen(true);
+    };
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    };
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -131,6 +149,7 @@ export const TemplateGenerator = () => {
     const exportRef = useRef(null);
     return (
         <Container className={classes.container} fixed>
+            <TutorialDialog open={dialogOpen} handleClose={handleDialogClose}/>
             <Grid container>
                 <Grid item xs={12}>
                     <AppBar position={"static"} color={"default"}>
@@ -138,6 +157,10 @@ export const TemplateGenerator = () => {
                             <Typography className={classes.title} variant="h6" noWrap>
                                 メニュー
                             </Typography>
+                            <Button className={classNames(classes.menuItem, classes.explain)} variant={"contained"}
+                                    color={"inherit"} size={"large"} onClick={handleDialogClickOpen}>
+                                使い方説明！
+                            </Button>
                             <div className={classes.grow}/>
                             <Button className={classes.menuItem} variant={"contained"} color={"primary"} size={"large"} onClick={() => exportComponentAsPNG (exportRef)}>
                                ダウンロード
@@ -195,7 +218,7 @@ export const TemplateGenerator = () => {
                         </Toolbar>
                     </AppBar>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} className={classes.mainGrid}>
                     <div ref={exportRef}>
                         <Box id="template" className={classes.box}>
                             <Grid container>

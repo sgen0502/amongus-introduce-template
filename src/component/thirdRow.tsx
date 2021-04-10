@@ -13,6 +13,7 @@ import playStyle from "../resources/playStyle.png";
 import theSkeld from "../resources/theSkeld.png";
 import miraHq from "../resources/miraHq.png";
 import polus from "../resources/polus.png";
+import airshio from '../resources/airship.png'
 import free from "../resources/free.png";
 import ufo from "../resources/ufo.png";
 import neko from "../resources/neko.png";
@@ -161,6 +162,7 @@ export const ThirdRow = (props: ThirdRowProps) => {
                             <MenuItem value={1}><img src={theSkeld} alt="name" className={classes.mapImage}/></MenuItem>
                             <MenuItem value={2}><img src={miraHq} alt="name" className={classes.mapImage}/></MenuItem>
                             <MenuItem value={3}><img src={polus} alt="name"  className={classes.mapImage}/></MenuItem>
+                            <MenuItem value={4}><img src={airshio} alt="name"  className={classes.mapImage}/></MenuItem>
                         </Select>
                         <div className={classes.flex}>
                             <img src={alienHat} alt="alienHat" className={classes.alienHutImg} />
