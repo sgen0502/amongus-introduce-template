@@ -15,7 +15,12 @@ import purpleGuy from "../resources/purpleGuy.png";
 import pinkGuy from "../resources/pinkGuy.png";
 import brownGuy from "../resources/brownGuy.png";
 import blackGuy from "../resources/blackGuy.png";
-
+import tanGuy from "../resources/tanGuy.png";
+import greyGuy from "../resources/greyGuy.png";
+import bananaGuy from "../resources/bananaGuy.png";
+import sunsetGuy from "../resources/sunsetGuy.png";
+import roseGuy from "../resources/roseGuy.png";
+import maroonGuy from "../resources/maroonGuy.png";
 
 const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Theme) =>
     createStyles({
@@ -47,12 +52,16 @@ const useStyles = (mainColor: string, boxColor: string) => makeStyles((theme: Th
             background: boxColor
         },
         deviceDiv: {
-            marginTop: theme.spacing(1),
+            marginTop: theme.spacing(2),
             display: "flex",
             justifyContent: "center"
         },
         characterBtn: {
-
+            margin: theme.spacing(-1)
+        },
+        characterImg: {
+            width: "75px",
+            height: "75px",
         },
         input: {
             fontSize: "42px"
@@ -68,12 +77,12 @@ export interface SecondRowProps {
     boxColor: string;
 }
 
-const GrayButton = (props: {img: any, select: boolean, setter: React.Dispatch<React.SetStateAction<boolean>>, className: string}) => {
-    const {img, select, setter, className} = props;
+const GrayButton = (props: {img: any, select: boolean, setter: React.Dispatch<React.SetStateAction<boolean>>, imgClass: string, btnClass: string}) => {
+    const {img, select, setter, imgClass, btnClass} = props;
 
     return (
-        <Button onClick={() => setter(!select)}>
-            <img src={img} alt="pc" className={className} />
+        <Button className={btnClass} onClick={() => setter(!select)}>
+            <img src={img} alt="pc" className={imgClass} />
         </Button>
     )
 }
@@ -90,6 +99,12 @@ export const SecondRow = (props: SecondRowProps) => {
     const [selectPink, setSelectPink] = useState(true);
     const [selectBrown, setSelectBrown] = useState(true);
     const [selectBlack, setSelectBlack] = useState(true);
+    const [selectRose, setSelectRose] = useState(true);
+    const [selectSunset, setSelectSunset] = useState(true);
+    const [selectMaroon, setSelectMaroon] = useState(true);
+    const [selectTan, setSelectTan] = useState(true);
+    const [selectBanana, setSelectBanana] = useState(true);
+    const [selectGrey, setSelectGrey] = useState(true);
 
     const {bgColor, boxColor} = props;
     const classes = useStyles(bgColor, boxColor)();
@@ -104,18 +119,24 @@ export const SecondRow = (props: SecondRowProps) => {
                 </div>
                 <Tooltip className={classes.nameTooltip} title="クリック・タップで選択" arrow>
                     <div className={classes.deviceDiv}>
-                        <GrayButton img={whiteGuy} select={selectWhite} setter={setSelectWhite} className={classnames(classes.characterBtn, {[classes.gray]: selectWhite})} />
-                        <GrayButton img={redGuy} select={selectRed} setter={setSelectRed} className={classnames(classes.characterBtn, {[classes.gray]: selectRed})} />
-                        <GrayButton img={orangeGuy} select={selectOrange} setter={setSelectOrange} className={classnames(classes.characterBtn, {[classes.gray]: selectOrange})} />
-                        <GrayButton img={yellowGuy} select={selectYellow} setter={setSelectYellow} className={classnames(classes.characterBtn, {[classes.gray]: selectYellow})} />
-                        <GrayButton img={greenGuy} select={selectGreen} setter={setSelectGreen} className={classnames(classes.characterBtn, {[classes.gray]: selectGreen})} />
-                        <GrayButton img={darkGreenGuy} select={selectDarkGreen} setter={setSelectDarkGreen} className={classnames(classes.characterBtn, {[classes.gray]: selectDarkGreen})} />
-                        <GrayButton img={skyBlueGuy} select={selectSkyBlue} setter={setSelectSkyBlue} className={classnames(classes.characterBtn, {[classes.gray]: selectSkyBlue})} />
-                        <GrayButton img={blueGuy} select={selectBlue} setter={setSelectBlue} className={classnames(classes.characterBtn, {[classes.gray]: selectBlue})} />
-                        <GrayButton img={purpleGuy} select={selectPurple} setter={setSelectPurple} className={classnames(classes.characterBtn, {[classes.gray]: selectPurple})} />
-                        <GrayButton img={pinkGuy} select={selectPink} setter={setSelectPink} className={classnames(classes.characterBtn, {[classes.gray]: selectPink})} />
-                        <GrayButton img={brownGuy} select={selectBrown} setter={setSelectBrown} className={classnames(classes.characterBtn, {[classes.gray]: selectBrown})} />
-                        <GrayButton img={blackGuy} select={selectBlack} setter={setSelectBlack} className={classnames(classes.characterBtn, {[classes.gray]: selectBlack})} />
+                        <GrayButton img={redGuy} select={selectRed} setter={setSelectRed} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectRed})} />
+                        <GrayButton img={orangeGuy} select={selectOrange} setter={setSelectOrange} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectOrange})} />
+                        <GrayButton img={yellowGuy} select={selectYellow} setter={setSelectYellow} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectYellow})} />
+                        <GrayButton img={greenGuy} select={selectGreen} setter={setSelectGreen} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectGreen})} />
+                        <GrayButton img={darkGreenGuy} select={selectDarkGreen} setter={setSelectDarkGreen} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectDarkGreen})} />
+                        <GrayButton img={skyBlueGuy} select={selectSkyBlue} setter={setSelectSkyBlue} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectSkyBlue})} />
+                        <GrayButton img={blueGuy} select={selectBlue} setter={setSelectBlue} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectBlue})} />
+                        <GrayButton img={purpleGuy} select={selectPurple} setter={setSelectPurple} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectPurple})} />
+                        <GrayButton img={pinkGuy} select={selectPink} setter={setSelectPink} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectPink})} />
+                        <GrayButton img={brownGuy} select={selectBrown} setter={setSelectBrown} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectBrown})} />
+                        <GrayButton img={blackGuy} select={selectBlack} setter={setSelectBlack} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectBlack})} />
+                        <GrayButton img={whiteGuy} select={selectWhite} setter={setSelectWhite} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectWhite})} />
+                        <GrayButton img={roseGuy} select={selectRose} setter={setSelectRose} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectRose})} />
+                        <GrayButton img={sunsetGuy} select={selectSunset} setter={setSelectSunset} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectSunset})} />
+                        <GrayButton img={maroonGuy} select={selectMaroon} setter={setSelectMaroon} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectMaroon})} />
+                        <GrayButton img={tanGuy} select={selectTan} setter={setSelectTan} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectTan})} />
+                        <GrayButton img={bananaGuy} select={selectBanana} setter={setSelectBanana} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectBanana})} />
+                        <GrayButton img={greyGuy} select={selectGrey} setter={setSelectGrey} btnClass={classes.characterBtn} imgClass={classnames(classes.characterImg, {[classes.gray]: selectGrey})} />
                     </div>
                 </Tooltip>
             </Box>
