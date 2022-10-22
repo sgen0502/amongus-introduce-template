@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDropzone} from 'react-dropzone';
 import star from "../resources/star.png";
 import imagePlaceHolder from "../resources/imagePlaceHolder.png";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Box, Button, createStyles, makeStyles, Theme, Tooltip} from "@material-ui/core";
 import name from "../resources/name.png";
 import playDevice from "../resources/playDevice.png";
@@ -9,6 +10,7 @@ import pc from "../resources/PC.png";
 import classnames from "classnames";
 import phone from "../resources/phone.png";
 import switchImg from "../resources/switch.png";
+import { FontResizableDiv } from "./font/FontResizableDiv";
 
 const useStyles = (mainColor: string, boxColor: string, font: string) => makeStyles((theme: Theme) =>
     createStyles({
@@ -73,6 +75,9 @@ const useStyles = (mainColor: string, boxColor: string, font: string) => makeSty
             fontFamily: font,
             minHeight: "130px"
         },
+        fontSize: {
+            fontSize: "20px",
+        },
         nameTooltip:{
             fontSize: "50px",
         }
@@ -120,6 +125,7 @@ export const FirstRow = (props: FirstRowProps) => {
                 <div contentEditable="true" className={classes.input}>
                     <span>名前</span>
                 </div>
+                {/*<FontResizableDiv placeHolder={"名前"} defaultFontSize={40} contentEditable="true" className={classes.input}/>*/}
             </Box>
             <Box className={classes.deviceBox} borderRadius={16}>
                 <div className={classes.flex}>

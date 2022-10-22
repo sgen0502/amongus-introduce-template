@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import ApplicationState from "../state/ApplicationStateContainer";
 import { exportComponentAsPNG  } from 'react-component-export-image';
+import { toPng } from 'html-to-image';
+import download from 'downloadjs';
 import { ChromePicker } from 'react-color';
 import {FirstRow} from "./firstRow";
 import {SecondRow} from "./secondRow";
@@ -21,6 +23,7 @@ import sign from "../resources/sign.png";
 import {FontPicker} from "./font/FontPicker";
 import classNames from "classnames";
 import { TutorialDialog } from "./tutorialDialog";
+
 const useStyles = (mainColor: string) => makeStyles((theme: Theme) =>
     createStyles({
         container: {
@@ -165,6 +168,14 @@ export const TemplateGenerator = () => {
                             <Button className={classes.menuItem} variant={"contained"} color={"primary"} size={"large"} onClick={() => exportComponentAsPNG (exportRef)}>
                                ダウンロード
                             </Button>
+                            <Button className={classes.menuItem} variant={"contained"} color={"primary"} size={"large"} onClick={() => {
+                                toPng(document.getElementById('mainViewDiv') as HTMLElement)
+                                    .then(function (dataUrl) {
+                                        download(dataUrl, 'my-node.png');
+                                    });
+                            }}>
+                                ダウンロード (左でズレる人用)
+                            </Button>
                             <FontPicker className={classes.menuItem} selectedFont={state.font} onChange={state.setFont}/>
                             <div >
                             <Menu
@@ -219,7 +230,7 @@ export const TemplateGenerator = () => {
                     </AppBar>
                 </Grid>
                 <Grid item xs={12} className={classes.mainGrid}>
-                    <div ref={exportRef}>
+                    <div id="mainViewDiv" ref={exportRef}>
                         <Box id="template" className={classes.box}>
                             <Grid container>
                                 <Grid item xs={12} className={classes.firstRow}>
