@@ -10,7 +10,7 @@ import pc from "../resources/PC.png";
 import classnames from "classnames";
 import phone from "../resources/phone.png";
 import switchImg from "../resources/switch.png";
-import { FontResizableDiv } from "./font/FontResizableDiv";
+//import { FontResizableDiv } from "./font/FontResizableDiv";
 
 const useStyles = (mainColor: string, boxColor: string, font: string) => makeStyles((theme: Theme) =>
     createStyles({
